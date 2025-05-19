@@ -1,0 +1,2049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ilona Lazoryshyna | AI Engineer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2d3047;
+            --secondary: #ffd166;
+            --accent: #ff9f1c;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --text: #333333;
+            --bg: #ffffff;
+            --transition: all 0.3s ease;
+            --font-sans: 'Inter', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --shadow: 0 5px 15px rgba(0,0,0,0.05);
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--text);
+            background-color: var(--bg);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--accent);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 2px;
+            background: var(--primary);
+            margin: 6px 0;
+            transition: var(--transition);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text {
+            max-width: 600px;
+        }
+
+        .hero-intro {
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            font-family: var(--font-serif);
+            color: var(--primary);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            border: 2px solid var(--accent);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--accent);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .hero-image {
+            position: relative;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            max-width: 80%;
+            margin-left: auto;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            transition: transform 0.8s ease;
+        }
+
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            font-family: var(--font-serif);
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            padding: 2rem;
+            border-top: 4px solid var(--accent);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .skill-icon {
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            font-size: 2.5rem;
+        }
+
+        .skill-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .skill-desc {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-list li::before {
+            content: '→';
+            color: var(--accent);
+            margin-right: 0.5rem;
+            font-weight: bold;
+        }
+
+        .experience {
+            position: relative;
+        }
+
+        .experience-content {
+            margin-top: 4rem;
+        }
+
+        .experience-timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .experience-timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: #eee;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 0 3rem 3rem 0;
+            box-sizing: border-box;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding: 0 0 3rem 3rem;
+        }
+
+        .timeline-content {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .timeline-date {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .timeline-company {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .timeline-desc {
+            color: #666;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            top: 15px;
+            right: -10px;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -10px;
+        }
+
+        .projects {
+            background: #f9f9f9;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .project-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-img img {
+            transform: scale(1.1);
+        }
+
+        .project-content {
+            padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .project-desc {
+            color: #666;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tag {
+            padding: 0.3rem 0.8rem;
+            background: #f1f1f1;
+            color: var(--primary);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .education {
+            background: white;
+        }
+
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .edu-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            padding: 2rem;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .edu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .edu-year {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .edu-degree {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .edu-school {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .contact {
+            position: relative;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-family: var(--font-serif);
+        }
+
+        .contact-info p {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .contact-links {
+            margin-bottom: 2rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .contact-link:hover {
+            color: var(--accent);
+        }
+
+        .contact-link i {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #f1f1f1;
+            border-radius: 50%;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .contact-form {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: var(--font-sans);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(255, 159, 28, 0.1);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 0 1rem;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: block;
+            color: white;
+        }
+
+        .footer-text {
+            max-width: 350px;
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .footer-nav h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: white;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--secondary);
+        }
+
+        .footer-social {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            background: var(--secondary);
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            opacity: 0.6;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--accent);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            visibility: hidden;
+            opacity: 0;
+            z-index: 99;
+        }
+
+        .back-to-top.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .back-to-top:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.4s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.6s;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-content, .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-image {
+                margin: 0 auto;
+                max-width: 350px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding: 0 0 3rem 3rem;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .experience-timeline::after {
+                left: 15px;
+            }
+
+            .timeline-dot {
+                left: 6px;
+                right: auto;
+            }
+
+            .timeline-item:nth-child(even) .timeline-dot {
+                left: 6px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .header-container {
+                height: 70px;
+            }
+
+            .nav-list {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: var(--transition);
+                z-index: 99;
+                gap: 2rem;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            }
+
+            .nav-list.active {
+                right: 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .hamburger.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .project-grid, .skill-grid, .education-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn {
+                padding: 0.7rem 1.5rem;
+            }
+        }
+
+        /* Modal Styles */
+        .project-modal {
+            display: none;
+            position: fixed;
+            z-index: 1100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            position: relative;
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 0;
+            width: 80%;
+            max-width: 1000px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            color: var(--primary);
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1200;
+        }
+        
+        .close-modal:hover,
+        .close-modal:focus {
+            color: var(--accent);
+        }
+        
+        .modal-body {
+            padding: 3rem;
+        }
+        
+        .modal-body h2 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-serif);
+        }
+        
+        .modal-subtitle {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-section {
+            margin-bottom: 2.5rem;
+        }
+        
+        .modal-section h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .modal-section p, .modal-section li {
+            color: #444;
+            line-height: 1.7;
+        }
+        
+        .modal-section ul {
+            margin-left: 1.5rem;
+        }
+        
+        .modal-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .gallery-item {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            display: block;
+        }
+        
+        .gallery-item p {
+            padding: 1rem;
+            background: #f9f9f9;
+            margin: 0;
+            text-align: center;
+            font-style: italic;
+            color: #555;
+        }
+        
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin-top: 10%;
+            }
+            
+            .modal-body {
+                padding: 2rem;
+            }
+            
+            .modal-body h2 {
+                font-size: 2rem;
+            }
+            
+            .modal-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 1200;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            overflow: auto;
+        }
+        
+        .image-modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90vh;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: zoom 0.3s ease;
+        }
+        
+        .close-image-modal {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1201;
+        }
+        
+        @keyframes zoom {
+            from {transform: translate(-50%, -50%) scale(0.1)}
+            to {transform: translate(-50%, -50%) scale(1)}
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">Ilona Lazoryshyna</div>
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#skills" class="nav-link">Skills</a></li>
+                    <li><a href="#experience" class="nav-link">Experience</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#education" class="nav-link">Education</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <div class="hero-text fade-in">
+                <div class="hero-intro">Hello, I'm</div>
+                <h1 class="hero-title">Ilona Lazoryshyna</h1>
+                <p class="hero-subtitle">AI Engineer specializing in building AI-powered applications, prompt engineering, developing Retrieval-Augmented Generation (RAG) systems and agentic workflows using large language models (LLMs). Experienced in data analysis, data processing, and machine learning, with a background in education that enhances communication, system design, and user-focused development.</p>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-primary">Get in Touch</a>
+                    <a href="#projects" class="btn btn-outline">View Projects</a>
+                </div>
+            </div>
+            <div class="hero-image fade-in delay-1">
+                <img src="1.png" alt="Ilona Lazoryshyna">
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">My Expertise</h2>
+            <p class="section-subtitle fade-in">Specialized skills in AI development, data analytics, and education</p>
+            
+            <div class="skill-grid">
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="skill-title">AI Engineering</h3>
+                    <p class="skill-desc">Focused on building and deploying generative AI and agentic AI solutions using large language models (LLMs)</p>
+                    <ul class="skill-list">
+                        <li>Generative AI Applications</li>
+                        <li>Agentic AI Workflows</li>
+                        <li>Retrieval-Augmented Generation (RAG)</li>
+                        <li>Prompt Engineering</li>
+                        <li>LLM Integration & Customization</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-card fade-in delay-1">
+                    <div class="skill-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="skill-title">Machine Learning</h3>
+                    <p class="skill-desc">Working knowledge of core ML concepts and pipelines, with experience training, evaluating, and applying models.</p>
+                    <ul class="skill-list">
+                        <li>Model Training & Evaluation</li>
+                        <li>Supervised Learning</li>
+                        <li>Feature Engineering</li>
+                        <li>Model Interpretation & Optimization</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-card fade-in delay-2">
+                    <div class="skill-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="skill-title">Data Analytics</h3>
+                    <p class="skill-desc">Experience with advanced analytics for deriving insights and making data-driven decisions.</p>
+                    <ul class="skill-list">
+                        <li>Data Cleaning & Processing</li>
+                        <li>Exploratory Data Analysis (EDA)</li>
+                        <li>Customer & Product Analytics</li>
+                        <li>Insight Generation & Reporting</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3 class="skill-title">AI Education</h3>
+                    <p class="skill-desc">Extensive experience in teaching on AI implementation for educational purposes.</p>
+                    <ul class="skill-list">
+                        <li>AI Integration in Education</li>
+                        <li>Educational Program Development</li>
+                        <li>Pedagogical Strategies</li>
+                        <li>Learning Experience Design</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-card fade-in delay-1">
+                    <div class="skill-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="skill-title">Communication</h3>
+                    <p class="skill-desc">Skilled in explaining complex AI concepts to both technical and non-technical stakeholders.</p>
+                    <ul class="skill-list">
+                        <li>Technical Writing</li>
+                        <li>Stakeholder Management</li>
+                        <li>Cross-functional Collaboration</li>
+                        <li>Knowledge Transfer</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-card fade-in delay-2">
+                    <div class="skill-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3 class="skill-title">AI Consulting</h3>
+                    <p class="skill-desc">Advising organizations on AI integration strategies to improve outcomes and efficiency.</p>
+                    <ul class="skill-list">
+                        <li>AI Strategy Development</li>
+                        <li>Process Optimization</li>
+                        <li>Technical Implementation</li>
+                        <li>Innovation Roadmapping</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section experience">
+        <div class="container">
+            <h2 class="section-title fade-in">Work Experience</h2>
+            <p class="section-subtitle fade-in">My professional journey in AI and education</p>
+            
+            <div class="experience-content">
+                <div class="experience-timeline">
+                    <!-- IFP Experience -->
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-content">
+                            <span class="timeline-date">Jan 2025 - Present</span>
+                            <h3 class="timeline-title">Artificial Intelligence Engineer</h3>
+                            <p class="timeline-company">Staatsinstitut für Frühpädagogik und Medienkompetenz (IFP)</p>
+                            <p class="timeline-desc">As an AI Engineer in the public sector in Germany, I design and lead end-to-end development of AI prototypes addressing real-world needs.</p>
+                            <p class="timeline-desc">My projects include an AI-powered search system for a KitaHub platform using Retrieval-Augmented Generation (RAG) and an Auto Live Translator for KITA workers, integrating transcription, translation, and text-to-speech in a local application. I independently manage the entire prototyping process—from model selection to deployment.</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <!-- DPS Experience -->
+                    <div class="timeline-item fade-in delay-1">
+                        <div class="timeline-content">
+                            <span class="timeline-date">Sep 2024 - Dec 2024</span>
+                            <h3 class="timeline-title">Artificial Intelligence Engineer</h3>
+                            <p class="timeline-company">DPS by UnternehmerTUM, KITA HUB</p>
+                            <p class="timeline-desc">Developed an AI-driven activity generator app that creates engaging, age-appropriate activities for kita workers.</p>
+                            <p class="timeline-desc">Led the AI development aspects and implemented advanced techniques such as Retrieval-Augmented Generation (RAG), image generation, and text-to-speech features to enhance the digital experience.</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <!-- Quantium Experience -->
+                    <div class="timeline-item fade-in delay-2">
+                        <div class="timeline-content">
+                            <span class="timeline-date">Jan 2024 - Mar 2024</span>
+                            <h3 class="timeline-title">Data Analytics Internships</h3>
+                            <p class="timeline-company">Quantium, TCS</p>
+                            <p class="timeline-desc">Gained practical experience in data preparation, customer analytics, experimentation, and uplift testing, with a focus on commercial applications.</p>
+                            <p class="timeline-desc">Leveraged advanced analytics techniques to optimize customer strategies.</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    
+                    <!-- Teaching Experience -->
+                    <div class="timeline-item fade-in delay-3">
+                        <div class="timeline-content">
+                            <span class="timeline-date">Mar 2020 - Feb 2022</span>
+                            <h3 class="timeline-title">English Teacher</h3>
+                            <p class="timeline-company">Antischool, Talk Studio</p>
+                            <p class="timeline-desc">Designed and developed educational programs and curricula tailored for diverse learners.</p>
+                            <p class="timeline-desc">Created structured learning paths and instructional materials, integrating innovative teaching methods to enhance engagement and knowledge retention.</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section projects">
+        <div class="container">
+            <h2 class="section-title fade-in">Featured Projects</h2>
+            <p class="section-subtitle fade-in">Recent work showcasing my expertise in AI engineering</p>
+            
+            <div class="project-grid">
+                <!-- AI-driven Activity Generator -->
+                <div class="project-card fade-in">
+                    <div class="project-img">
+                        <img src="1.1.png" alt="AI-driven Activity Generator">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">AI-driven Activity Generator</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Prompt Engineering</span>
+                            <span class="project-tag">LLM Integration</span>
+                            <span class="project-tag">Image Generation</span>
+                            <span class="project-tag">Interactive AI</span>
+                        </div>
+                        <p class="project-desc">Developed an innovative AI-powered application for early childhood educators that generates age-appropriate, engaging activities. Using prompt-engineered large language models and AI-generated visuals, the app offers a personalized and time-saving planning experience tailored to children's developmental needs.</p>
+                        <a href="#" class="btn btn-outline">View Details</a>
+                    </div>
+                </div>
+                
+                <!-- LLM Search Enhancement -->
+                <div class="project-card fade-in delay-1">
+                    <div class="project-img">
+                        <img src="2.1.png" alt="LLM Search Enhancement">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">LLM-Powered Search System</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Retrieval-Augmented Generation (RAG)</span>
+                            <span class="project-tag">Semantic Search</span>
+                            <span class="project-tag">Text Embeddings</span>
+                        </div>
+                        <p class="project-desc">Transformed traditional relational search mechanisms into an advanced LLM-powered search system for the early childhood education sector. This solution significantly improved content discovery and relevance for educators, providing contextually appropriate resources for child development.</p>
+                        <a href="#" class="btn btn-outline">View Details</a>
+                    </div>
+                </div>
+                
+                <!-- Auto Live Translator -->
+                <div class="project-card fade-in delay-2">
+                    <div class="project-img">
+                        <img src="3.1.png" alt="Auto Live Translator">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Kita Speech Translator</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Speech-to-Text</span>
+                            <span class="project-tag">Neural Translation</span>
+                            <span class="project-tag">Text-to-Speech</span>
+                            <span class="project-tag">Local LLM Usage</span>
+                        </div>
+                        <p class="project-desc">A comprehensive web application that provides real-time speech-to-text, translation, and text-to-speech capabilities across multiple languages. Features three distinct processing pipelines optimized for different use cases, from quick conversations to longer presentations.</p>
+                        <a href="#" class="btn btn-outline">View Details</a>
+                    </div>
+                </div>
+                
+                <!-- Legacy AI -->
+                <div class="project-card fade-in">
+                    <div class="project-img">
+                        <img src="4.1.jpeg" alt="Legacy AI">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Legacy AI</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Conversational AI Mentorship</span>
+                            <span class="project-tag">Generative AI</span>
+                            <span class="project-tag">Full-Stack Mobile Development</span>
+                        </div>
+                        <p class="project-desc">Developed a mobile app that brings historical figures to life as AI-powered mentors. The system uses generative AI to deliver personalized advice and insights through natural conversations, supported by a custom-designed interface, AI-generated visuals, and internationalization features.</p>
+                        <a href="#" class="btn btn-outline">View Details</a>
+                    </div>
+                </div>
+                
+                <!-- Machine Learning Pipeline -->
+                <div class="project-card fade-in delay-1">
+                    <div class="project-img">
+                        <img src="5.1.png" alt="Visualizing Weather Patterns and Climate Change">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Visualizing Weather Patterns and Climate Change</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Machine Learning</span>
+                            <span class="project-tag">Climate Forecasting</span>
+                            <span class="project-tag">Time-Series Analysis</span>
+                        </div>
+                        <p class="project-desc">It's a machine learning–driven project designed to analyze over a century of weather data from 18 European stations to detect and understand long-term climate change patterns. The system explores how present-day weather conditions correlate with broader climatic shifts and aims to support environmental policy and mitigation efforts through data-driven insights.</p>
+                        <a href="#" class="btn btn-outline">View Details</a>
+                    </div>
+                </div>
+                
+                <!-- Advanced Data Analysis Platform -->
+                <div class="project-card fade-in delay-2">
+                    <div class="project-img">
+                        <img src="6.1.png" alt="Analyzing Earthquake Patterns in 2023">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Analyzing Earthquake Patterns in 2023</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Geospatial Analytics</span>
+                            <span class="project-tag">Clustering & Regression</span>
+                            <span class="project-tag">Data Visualization</span>
+                        </div>
+                        <p class="project-desc">Earthquakes 2023 is a data analysis and visualization project focused on seismic activity patterns throughout the year 2023. Using real-world earthquake data sourced from USGS and Kaggle, the project explores spatial and temporal distributions, magnitudes, depths, and underlying correlations between key seismic parameters.</p>
+                        <a href="#" class="btn btn-outline">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="section education">
+        <div class="container">
+            <h2 class="section-title fade-in">Education</h2>
+            <p class="section-subtitle fade-in">My academic background and certifications</p>
+            
+            <div class="education-grid">
+                <div class="edu-card fade-in">
+                    <span class="edu-year">2024</span>
+                    <h3 class="edu-degree">Professional Certificate in Artificial Intelligence</h3>
+                    <p class="edu-school">DPS by UnternehmerTUM</p>
+                </div>
+                
+                <div class="edu-card fade-in delay-1">
+                    <span class="edu-year">2023 - 2024</span>
+                    <h3 class="edu-degree">Data Analytics and Machine Learning Engineering</h3>
+                    <p class="edu-school">Career Foundry Academy</p>
+                </div>
+                
+                <div class="edu-card fade-in delay-2">
+                    <span class="edu-year">2015 - 2019</span>
+                    <h3 class="edu-degree">Bachelor's degree - History Teacher</h3>
+                    <p class="edu-school">Poltava National Pedagogical University</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title fade-in">Get In Touch</h2>
+            <p class="section-subtitle fade-in">Let's discuss how we can work together</p>
+            
+            <div class="contact-container">
+                <div class="contact-info fade-in">
+                    <h3>Let's Start a Conversation</h3>
+                    <p>I'm always open to discussing new projects, creative ideas, and potential collaborations.</p>
+                    
+                    <div class="contact-links">
+                        <a href="mailto:lazoryshynailona@gmail.com" class="contact-link">
+                            <i class="fas fa-envelope"></i>
+                            <span>lazoryshynailona@gmail.com</span>
+                        </a>
+                        <a href="#" class="contact-link">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Munich, Germany</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/ilona-lazoryshyna/" target="_blank" class="contact-link">
+                            <i class="fab fa-linkedin-in"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                    </div>
+                    
+                    <div class="social-links" style="display:none;"></div>
+                </div>
+                
+                <div class="contact-form fade-in delay-1" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0; background: none; box-shadow: none; border-radius: 0;">
+                    <img src="3.jpg" alt="Ilona Lazoryshyna" style="width:100%;max-width:340px;display:block;margin:0 auto;border-radius:18px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-info">
+                    <a href="#" class="footer-logo">Ilona Lazoryshyna</a>
+                    <p class="footer-text">AI Engineer specializing in language models, RAG systems, and AI education. Passionate about leveraging technology to create innovative solutions.</p>
+                </div>
+                
+                <div class="footer-nav">
+                    <h4>Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#education">Education</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-nav">
+                    <h4>Contact</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:lazoryshynailona@gmail.com">lazoryshynailona@gmail.com</a></li>
+                        <li><a href="#">Munich, Germany</a></li>
+                        <li><a href="https://www.linkedin.com/in/ilona-lazoryshyna/" target="_blank">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ilona Lazoryshyna. All Rights Reserved.</p>
+                <p style="font-size:0.85rem; margin-top:0.5rem; color:#eee;">
+                    <a href="impressum.pdf" download style="color:#eee; text-decoration:underline;">Download Impressum</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Project Modal - AI-driven Activity Generator -->
+    <div id="projectModal1" class="project-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-body">
+                <h2>AI-driven Activity Generator</h2>
+                <p class="modal-subtitle">A system that generates age-appropriate activities for early childhood educators</p>
+                
+                <div class="modal-section">
+                    <h3>Project Overview</h3>
+                    <p>As an AI Engineer, I contributed to the development of an AI-powered activity generation app for early childhood educators working in Kitas (daycares). The app addresses the daily challenge of creating engaging, age-appropriate activities while managing time constraints. Using prompt-engineered large language models (LLMs), the app generates and customizes activities in real time, helping educators plan more efficiently and creatively.</p>
+                    <p>A hybrid content strategy was implemented: the app launched with a database of 200 activities, including 70 sourced from an educational book and 130 pre-generated using LLMs, ensuring both quality and scale from day one.</p>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Key Features</h3>
+                    <ul>
+                        <li><strong>AI-Powered Activity Generation:</strong> Instantly create personalized activity ideas based on children's age and interests.</li>
+                        <li><strong>Interactive Editing:</strong> Tailor activities through an AI chat interface to meet specific classroom needs.</li>
+                        <li><strong>Curated Activity Library:</strong> Browse a thematic database with 200 activities — a mix of expert-authored and AI-generated content.</li>
+                        <li><strong>Visual Support with AI:</strong> Enhance understanding with AI-generated illustrations accompanying each activity.</li>
+                        <li><strong>Smart Search & Filtering:</strong> Filter by group size, materials, duration, or themes to quickly find relevant activities.</li>
+                        <li><strong>Save & Share Functionality:</strong> Bookmark favorite activities and share them with parents or colleagues via QR codes.</li>
+                    </ul>
+                </div>
+                
+                <div class="modal-gallery">
+                    <div class="gallery-item">
+                        <img src="1.1.png" alt="Activity Generator Interface">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="1.2.png" alt="Activity Example">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="1.3.png" alt="Administrator Dashboard">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="1.4.png" alt="Activity Customization">
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Technologies Used</h3>
+                    <ul>
+                        <li>Languages: Python, TypeScript</li>
+                        <li>Frameworks & Libraries: ReactJS, Fastify</li>
+                        <li>Database: MongoDB</li>
+                        <li>Design Tools: Figma</li>
+                        <li>AI & NLP: Prompt Engineering, LLMs, AI-Based Image Generation</li>
+                        <li>UX Features: Interactive chat for activity customization, dynamic QR code generation</li>
+                    </ul>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Impact</h3>
+                    <p>The application significantly accelerates the planning process for educators, reducing the time they spend brainstorming and preparing activities. By supporting educators in maintaining creativity and variety with minimal effort, the app empowers them to focus more on direct interaction with children.</p>
+                    <p>The integration of AI-generated visuals and personalized content enhances engagement, delivering richer activities that resonate with both children and staff. The hybrid content model, blending expert-authored and AI-generated content, ensures both trust and scalability from the start, creating a sustainable foundation for future growth.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Modal - LLM Search Enhancement -->
+    <div id="projectModal2" class="project-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-body">
+                <h2>LLM-Powered Search System</h2>
+                <p class="modal-subtitle">A semantic search system for Kita Hub using RAG pipeline</p>
+                
+                <div class="modal-section">
+                    <h3>Project Overview</h3>
+                    <p>Developed a fully functional AI-powered semantic search prototype for Kita Hub, using a Retrieval-Augmented Generation (RAG) pipeline to deliver accurate, source-linked answers from internal documents in German. The system supports both platform-related and training-related queries for Kita workers.</p>
+                    <p>The prototype was built using ~80 curated German PDF documents and combines semantic search, fine-tuned LLMs, and modern frontend development aligned with corporate design.</p>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Key Features</h3>
+                    <ul>
+                        <li><strong>RAG Pipeline:</strong> Integrated document retrieval with LLM-based answer generation for precise and transparent results.</li>
+                        <li><strong>Vector Search with FAISS:</strong> Used Hugging Face embeddings and FAISS for efficient semantic search over PDF content.</li>
+                        <li><strong>German-Language LLM:</strong> Deployed a LLaMA-based model fine-tuned for German to ensure high relevance and contextual accuracy.</li>
+                        <li><strong>Source Attribution:</strong> Each response includes direct links to the original source document.</li>
+                        <li><strong>Supports Two Query Types:</strong>
+                            <ul>
+                                <li>Platform usage (e.g., mail notifications, account settings)</li>
+                                <li>Educational content for Kita workers</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="modal-gallery">
+                    <div class="gallery-item">
+                        <img src="2.1.png" alt="Search Interface">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="2.2.png" alt="Search Results">
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Technologies Used</h3>
+                    <h4>Backend</h4>
+                    <ul>
+                        <li>Python, FastAPI</li>
+                        <li>Sentence Transformers (all-MiniLM-L6-v2)</li>
+                        <li>FAISS for vector-based semantic search</li>
+                        <li>PDFPlumber & PyTesseract for text and OCR extraction</li>
+                        <li>Private LLM API (German-tuned, LLaMA-based) for response generation</li>
+                        <li>Langdetect for detecting query language</li>
+                        <li>Docker for containerization</li>
+                    </ul>
+                    
+                    <h4>Frontend</h4>
+                    <ul>
+                        <li>HTML, CSS, JavaScript</li>
+                        <li>Fetch API for async communication</li>
+                    </ul>
+                    
+                    <h4>Architecture & Data</h4>
+                    <ul>
+                        <li>Architecture: RAG (Embedding → Retrieval → Generation)</li>
+                        <li>Data: ~80 structured German PDF files from Kita Hub</li>
+                    </ul>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Impact</h3>
+                    <p>Enabled natural language access to internal documentation for Kita workers.</p>
+                    <p>Improved accuracy and trust through source-cited AI responses.</p>
+                    <p>Delivered a scalable architecture ready for additional content and future expansion.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Modal - Auto Live Translator -->
+    <div id="projectModal3" class="project-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-body">
+                <h2>Kita Speech Translator</h2>
+                <p class="modal-subtitle">A comprehensive web application for real-time speech translation and processing</p>
+                
+                <div class="modal-section">
+                    <h3>Project Overview</h3>
+                    <p>Kita Speech Translator is a comprehensive web application that provides real-time speech-to-text, translation, and text-to-speech capabilities across multiple languages. The system is designed with three distinct processing pipelines optimized for different use cases:</p>
+                    <ul>
+                        <li><strong>Pipeline 1 (Direct Processing):</strong> Handles microphone recordings with immediate processing for quick conversational translation.</li>
+                        <li><strong>Pipeline 2 (Small File Processing):</strong> Processes audio files under 6 minutes with simple, direct translation without progress tracking.</li>
+                        <li><strong>Pipeline 3 (Large File Processing):</strong> Handles longer audio files (>6 minutes) by breaking them into 1-minute chunks and processing them in parallel with 6 workers, showing incremental results and detailed progress tracking.</li>
+                    </ul>
+                    <p>The application features a user-friendly interface that allows users to record audio directly from their browser or upload audio files in various formats. The system automatically determines the appropriate processing pipeline based on the input type and file size, providing optimal performance for each scenario.</p>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Key Features</h3>
+                    <ul>
+                        <li><strong>Multi-language Support:</strong> Translates between 60+ languages with automatic language detection capability.</li>
+                        <li><strong>Adaptive Processing Pipeline:</strong> Automatically selects the most efficient processing approach based on input type and duration.</li>
+                        <li><strong>Real-time Incremental Translation:</strong> Shows translation results as they become available, particularly useful for longer files.</li>
+                        <li><strong>Parallel Processing:</strong> Utilizes parallel workers to efficiently process larger files by breaking them into manageable chunks.</li>
+                        <li><strong>Progress Tracking:</strong> Provides detailed progress indicators for large file processing with estimated completion times.</li>
+                        <li><strong>Text-to-Speech (TTS):</strong> Converts translated text to natural-sounding speech in the target language.</li>
+                        <li><strong>Conversation History:</strong> Maintains and displays the full conversation history with options to download transcripts.</li>
+                    </ul>
+                </div>
+                
+                <div class="modal-gallery">
+                    <div class="gallery-item">
+                        <img src="3.1.png" alt="Translation Interface">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="3.png" alt="Usage Statistics">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="3.2.png" alt="Technical Architecture">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="3.4.png" alt="Local LLM Usage">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="3.5.png" alt="System Components">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="3.6.png" alt="Deployment Architecture">
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Technologies Used</h3>
+                    <h4>Backend</h4>
+                    <ul>
+                        <li>Python with FastAPI for the RESTful API framework</li>
+                        <li>Whisper models for speech-to-text transcription</li>
+                        <li>Marian-MT for neural machine translation</li>
+                        <li>Coqui TTS for text-to-speech synthesis</li>
+                        <li>Asyncio for concurrent processing</li>
+                        <li>Docker for containerization and deployment</li>
+                    </ul>
+                    
+                    <h4>Frontend</h4>
+                    <ul>
+                        <li>Modern JavaScript (ES6+) for client-side logic</li>
+                        <li>HTML5/CSS3 for responsive layout</li>
+                        <li>Web Audio API for recording functionality</li>
+                        <li>Fetch API for asynchronous communication with the backend</li>
+                    </ul>
+                    
+                    <h4>Processing Technologies</h4>
+                    <ul>
+                        <li>FFMPEG for audio preprocessing and conversion</li>
+                        <li>PyDub and SoundFile for audio manipulation</li>
+                        <li>Hugging Face Transformers for ML model integration</li>
+                        <li>Multithreaded processing for performance optimization</li>
+                    </ul>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Impact</h3>
+                    <p>Kita Speech Translator bridges language barriers in real-time, enabling effective communication across language boundaries. The system's adaptive processing approach allows it to be used in various scenarios, from quick one-on-one conversations to processing longer presentations or meetings.</p>
+                    <p>The ability to operate in air-gapped environments makes it suitable for use in secure facilities where external network access is restricted. The containerized deployment simplifies installation and ensures consistent operation across different environments.</p>
+                    <p>Overall, Kita Speech Translator represents a powerful tool for multilingual communication, language learning, content localization, and international collaboration, with its tiered processing approach offering an optimal balance between performance and resource utilization.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Modal - Legacy AI -->
+    <div id="projectModal4" class="project-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-body">
+                <h2>Legacy AI</h2>
+                <p class="modal-subtitle">Conversational mentorship with legendary historical figures</p>
+                
+                <div class="modal-section">
+                    <h3>Project Overview</h3>
+                    <p>Legacy AI is a conversational AI app that lets users interact with legendary historical figures as personal mentors. Designed to inspire, guide, and engage users with timeless wisdom, the app blends generative AI, personalization, and immersive visuals to offer a unique mentorship experience. Built entirely from scratch, the app merges two passions — history and AI — into a fully working, mobile-first product.</p>
+                    <p>Users can ask for advice, explore themed guidance, and save meaningful insights like a personal journal. Each mentor (e.g., Ada Lovelace, Stephen Hawking, Marie Curie) is supported with AI-generated dialogue and visuals crafted to respectfully reflect their legacy.</p>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Key Features</h3>
+                    <ul>
+                        <li><strong>Conversational Mentorship:</strong> Chat with AI personas of historical figures for guidance, inspiration, or reflective thought.</li>
+                        <li><strong>Personalized Insights:</strong> Tailored responses based on user mood, goals, and topics of interest.</li>
+                        <li><strong>Notebook Functionality:</strong> Save memorable quotes or advice for later reflection.</li>
+                        <li><strong>Multilingual Support:</strong> Internationalization with i18next for a global user base.</li>
+                        <li><strong>AI-Generated Visuals:</strong> Each mentor is visually represented using AI art for emotional and aesthetic impact.</li>
+                        <li><strong>Mobile-First Experience:</strong> Built natively for mobile using React Native.</li>
+                    </ul>
+                </div>
+                <div class="modal-gallery">
+                    <div class="gallery-item">
+                        <img src="4.1.jpeg" alt="Mentor Ada Lovelace">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="4.2.jpeg" alt="Mentor Stephen Hawking">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="4.3.jpeg" alt="Mentor Marie Curie">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="4.4.jpeg" alt="Mentor Albert Einstein">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="4.5.jpeg" alt="Mentor Nikola Tesla">
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Technologies Used</h3>
+                    <ul>
+                        <li><strong>Frontend (React Native):</strong> Expo, Firebase Auth, Firestore</li>
+                        <li>Reanimated, AV modules, Expo APIs</li>
+                        <li>i18next for multilingual support</li>
+                        <li>TypeScript for type safety</li>
+                        <li><strong>Backend (Python + FastAPI):</strong> OpenAI API for LLM-generated conversations</li>
+                        <li>SQLAlchemy & Redis for data persistence and caching</li>
+                        <li>Firebase Admin SDK for secure user management</li>
+                        <li>Docker for deployment</li>
+                    </ul>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Impact</h3>
+                    <ul>
+                        <li><strong>End-to-End Ownership:</strong> Designed, developed, and deployed independently — from UX to backend APIs.</li>
+                        <li><strong>Bridging AI and Humanity:</strong> Reimagines how generative AI can provide timeless wisdom through historical voices.</li>
+                        <li><strong>Highly Personalized:</strong> Encourages emotional connection and introspection through AI-driven mentorship.</li>
+                        <li><strong>Creative Storytelling Tool:</strong> Offers an emotionally rich user experience that blends technology with cultural legacy.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Modal - ML -->
+    <div id="projectModal5" class="project-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-body">
+                <h2>Visualizing Weather Patterns and Climate Change</h2>
+                <p class="modal-subtitle">Machine learning for climate pattern analysis and forecasting</p>
+                
+                <div class="modal-section">
+                    <h3>Project Overview</h3>
+                    <p>ClimateWins is a machine learning–driven project designed to analyze over a century of weather data from 18 European stations to detect and understand long-term climate change patterns. The system explores how present-day weather conditions correlate with broader climatic shifts and aims to support environmental policy and mitigation efforts through data-driven insights.</p>
+                    <p>The project combines rigorous data preprocessing, advanced feature engineering, and both predictive and unsupervised modeling techniques to forecast extreme weather and surface climate-related anomalies. Visualizations were crafted to communicate findings clearly to non-technical stakeholders.</p>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Key Features</h3>
+                    <ul>
+                        <li><strong>Historical Data Analysis:</strong> Processed and analyzed 100+ years of meteorological data from 18 European weather stations.</li>
+                        <li><strong>Feature Engineering:</strong> Derived meaningful indicators like temperature anomalies and seasonal trends to capture long-term patterns.</li>
+                        <li><strong>Machine Learning Models:</strong>
+                            <ul>
+                                <li>Regression for predicting climate-related variables</li>
+                                <li>Clustering for identifying hidden weather pattern groupings</li>
+                            </ul>
+                        </li>
+                        <li><strong>Visualization & Reporting:</strong> Built clear visual narratives using Matplotlib and Seaborn for stakeholder-friendly interpretation.</li>
+                        <li><strong>Policy Impact Potential:</strong> Provides predictive tools to support climate adaptation strategies and extreme event preparedness.</li>
+                    </ul>
+                </div>
+                
+                <div class="modal-gallery">
+                    <div class="gallery-item">
+                        <img src="5.2.png" alt="Model Performance Dashboard">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="5.3.png" alt="Feature Importance Visualization">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="5.4.png" alt="Data Processing Pipeline">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="5.5.png" alt="Model Training Process">
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Technologies Used</h3>
+                    <ul>
+                        <li><strong>Languages & Libraries:</strong> Python, Pandas, NumPy</li>
+                        <li><strong>Machine Learning:</strong> Scikit-learn, XGBoost</li>
+                        <li><strong>Visualization:</strong> Matplotlib, Seaborn</li>
+                        <li><strong>Data Processing:</strong> Custom scripts for cleaning and transforming raw CSV weather data</li>
+                        <li><strong>Environment:</strong> Jupyter Notebooks</li>
+                    </ul>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Impact</h3>
+                    <ul>
+                        <li>Delivered actionable insights for environmental risk assessment.</li>
+                        <li>Demonstrated the role of machine learning in linking historical weather data to modern climate challenges.</li>
+                        <li>Empowered non-technical audiences through clear, visual communication of complex trends.</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Links</h3>
+                    <ul>
+                        <li><a href="https://github.com/ilonalaz/WEATHER-CONDITIONS-AND-CLIMATE-CHANGE-WITH-CLIMATEWINS" target="_blank">GitHub Repo (Part 1)</a></li>
+                        <li><a href="https://github.com/ilonalaz/WEATHER-CONDITIONS-AND-CLIMATE-CHANGE-WITH-CLIMATEWINS-PART-2" target="_blank">GitHub Repo (Part 2)</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Modal - Analysis -->
+    <div id="projectModal6" class="project-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-body">
+                <h2>Analyzing Earthquake Patterns in 2023</h2>
+                <p class="modal-subtitle">Comprehensive analysis and visualization of seismic activity in 2023</p>
+                
+                <div class="modal-section">
+                    <h3>Project Overview</h3>
+                    <p>Earthquakes 2023 is a data analysis and visualization project focused on seismic activity patterns throughout the year 2023. Using real-world earthquake data sourced from USGS and Kaggle, the project explores spatial and temporal distributions, magnitudes, depths, and underlying correlations between key seismic parameters.</p>
+                    <p>Through a combination of statistical analysis, geospatial mapping, clustering, and time-series techniques, the project uncovers actionable insights that support disaster preparedness and seismic risk evaluation.</p>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Key Features</h3>
+                    <ul>
+                        <li><strong>Exploratory Data Analysis (EDA):</strong> Used scatterplots, heatmaps, pair plots, and categorical plots to reveal trends and relationships in seismic data.</li>
+                        <li><strong>Geospatial Mapping:</strong> Leveraged shapefiles and geographic visualizations to map earthquake locations and intensities in relation to tectonic plates.</li>
+                        <li><strong>Regression Analysis:</strong> Investigated relationships between magnitude, depth, and reporting stations.</li>
+                        <li><strong>Clustering:</strong> Applied unsupervised learning to detect regional seismic activity patterns.</li>
+                        <li><strong>Time-Series Analysis:</strong> Analyzed temporal trends to identify peak activity periods and shifts over time.</li>
+                        <li><strong>Interactive Dashboards:</strong> Presented key insights through Tableau dashboards to support non-technical audiences.</li>
+                    </ul>
+                </div>
+                
+                <div class="modal-gallery">
+                    <div class="gallery-item">
+                        <img src="6.2.png" alt="Geospatial Visualization">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="6.4.png" alt="Time-Series Trends">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="6.5.png" alt="Magnitude-Depth Correlation">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="6.1.png" alt="Summary Dashboard">
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Technologies Used</h3>
+                    <ul>
+                        <li><strong>Languages:</strong> Python</li>
+                        <li><strong>Libraries:</strong> Pandas, NumPy, Seaborn, Matplotlib, Plotly</li>
+                        <li><strong>Machine Learning:</strong> Scikit-learn (clustering, regression)</li>
+                        <li><strong>Geospatial Tools:</strong> GeoPandas, Shapely</li>
+                        <li><strong>Visualization:</strong> Tableau (for interactive dashboards)</li>
+                        <li><strong>Data Source:</strong> USGS Earthquake Catalog (via Kaggle)</li>
+                    </ul>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Impact</h3>
+                    <ul>
+                        <li>Identified correlations between earthquake magnitude and seismic station reporting density.</li>
+                        <li>Mapped seismic activity relative to tectonic boundaries for improved spatial awareness.</li>
+                        <li>Discovered patterns in magnitude and depth distributions relevant for hazard forecasting.</li>
+                        <li>Enabled interactive exploration of earthquake data via Tableau dashboards.</li>
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Links</h3>
+                    <ul>
+                        <li><a href="https://github.com/ilonalaz/Earthquakes-2023-Project" target="_blank">GitHub Repository</a></li>
+                        <li><a href="https://public.tableau.com/app/profile/ilona.lazoryshyna/viz/Earthquakes2023_17063432076390/Final" target="_blank">Tableau Dashboard</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="imageModal" class="image-modal">
+        <span class="close-image-modal">&times;</span>
+        <img class="image-modal-content" id="modalImage">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navList = document.querySelector('.nav-list');
+            
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navList.classList.toggle('active');
+            });
+            
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navList.classList.remove('active');
+                });
+            });
+            
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const target = document.querySelector(this.getAttribute('href'));
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    
+                    window.scrollTo({
+                        top: target.offsetTop - headerHeight,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Back to top button
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 500) {
+                    backToTopBtn.classList.add('active');
+                } else {
+                    backToTopBtn.classList.remove('active');
+                }
+            });
+            
+            backToTopBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Scroll animation
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            fadeElements.forEach(element => {
+                fadeInObserver.observe(element);
+            });
+            
+            // Form submission
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message! I will get back to you soon.');
+                this.reset();
+            });
+            
+            // Project Modals
+            const modals = document.querySelectorAll('.project-modal');
+            const closeModalBtns = document.querySelectorAll('.close-modal');
+            
+            // Open modals for projects
+            document.querySelectorAll('.project-card .btn').forEach((btn, index) => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const modalId = `projectModal${index + 1}`;
+                    const modal = document.getElementById(modalId);
+                    if (modal) {
+                        modal.style.display = 'block';
+                        document.body.style.overflow = 'hidden'; // Prevent scrolling
+                    }
+                });
+            });
+            
+            // Close modals
+            closeModalBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const modal = this.closest('.project-modal');
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto'; // Enable scrolling
+                });
+            });
+            
+            // Close modal if clicked outside
+            window.addEventListener('click', function(e) {
+                modals.forEach(modal => {
+                    if (e.target === modal) {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto'; // Enable scrolling
+                    }
+                });
+            });
+
+            // Image Modal functionality
+            const imageModal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const closeImageModal = document.querySelector('.close-image-modal');
+            
+            // Add click event to all gallery images
+            document.querySelectorAll('.gallery-item img').forEach(img => {
+                img.addEventListener('click', function() {
+                    imageModal.style.display = "block";
+                    modalImg.src = this.src;
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling
+                });
+            });
+            
+            // Close image modal when clicking the close button
+            closeImageModal.addEventListener('click', function() {
+                imageModal.style.display = "none";
+                document.body.style.overflow = 'auto'; // Enable scrolling
+            });
+            
+            // Close image modal when clicking outside the image
+            imageModal.addEventListener('click', function(e) {
+                if (e.target === imageModal) {
+                    imageModal.style.display = "none";
+                    document.body.style.overflow = 'auto'; // Enable scrolling
+                }
+            });
+            
+            // Close image modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && imageModal.style.display === 'block') {
+                    imageModal.style.display = "none";
+                    document.body.style.overflow = 'auto'; // Enable scrolling
+                }
+            });
+        });
+    </script>
+</body>
+</html>
