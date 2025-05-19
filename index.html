@@ -1246,7 +1246,7 @@
                             <span class="project-tag">Interactive AI</span>
                         </div>
                         <p class="project-desc">Developed an innovative AI-powered application for early childhood educators that generates age-appropriate, engaging activities. Using prompt-engineered large language models and AI-generated visuals, the app offers a personalized and time-saving planning experience tailored to children's developmental needs.</p>
-                        <a href="#" class="btn btn-outline">View Details</a>
+                        <button class="btn btn-outline" data-modal="projectModal1">View Details</button>
                     </div>
                 </div>
                 
@@ -1263,7 +1263,7 @@
                             <span class="project-tag">Text Embeddings</span>
                         </div>
                         <p class="project-desc">Transformed traditional relational search mechanisms into an advanced LLM-powered search system for the early childhood education sector. This solution significantly improved content discovery and relevance for educators, providing contextually appropriate resources for child development.</p>
-                        <a href="#" class="btn btn-outline">View Details</a>
+                        <button class="btn btn-outline" data-modal="projectModal2">View Details</button>
                     </div>
                 </div>
                 
@@ -1281,7 +1281,7 @@
                             <span class="project-tag">Local LLM Usage</span>
                         </div>
                         <p class="project-desc">A comprehensive web application that provides real-time speech-to-text, translation, and text-to-speech capabilities across multiple languages. Features three distinct processing pipelines optimized for different use cases, from quick conversations to longer presentations.</p>
-                        <a href="#" class="btn btn-outline">View Details</a>
+                        <button class="btn btn-outline" data-modal="projectModal3">View Details</button>
                     </div>
                 </div>
                 
@@ -1298,7 +1298,7 @@
                             <span class="project-tag">Full-Stack Mobile Development</span>
                         </div>
                         <p class="project-desc">Developed a mobile app that brings historical figures to life as AI-powered mentors. The system uses generative AI to deliver personalized advice and insights through natural conversations, supported by a custom-designed interface, AI-generated visuals, and internationalization features.</p>
-                        <a href="#" class="btn btn-outline">View Details</a>
+                        <button class="btn btn-outline" data-modal="projectModal4">View Details</button>
                     </div>
                 </div>
                 
@@ -1315,7 +1315,7 @@
                             <span class="project-tag">Time-Series Analysis</span>
                         </div>
                         <p class="project-desc">It's a machine learning–driven project designed to analyze over a century of weather data from 18 European stations to detect and understand long-term climate change patterns. The system explores how present-day weather conditions correlate with broader climatic shifts and aims to support environmental policy and mitigation efforts through data-driven insights.</p>
-                        <a href="#" class="btn btn-outline">View Details</a>
+                        <button class="btn btn-outline" data-modal="projectModal5">View Details</button>
                     </div>
                 </div>
                 
@@ -1332,7 +1332,7 @@
                             <span class="project-tag">Data Visualization</span>
                         </div>
                         <p class="project-desc">Earthquakes 2023 is a data analysis and visualization project focused on seismic activity patterns throughout the year 2023. Using real-world earthquake data sourced from USGS and Kaggle, the project explores spatial and temporal distributions, magnitudes, depths, and underlying correlations between key seismic parameters.</p>
-                        <a href="#" class="btn btn-outline">View Details</a>
+                        <button class="btn btn-outline" data-modal="projectModal6">View Details</button>
                     </div>
                 </div>
             </div>
@@ -1977,10 +1977,9 @@
             const closeModalBtns = document.querySelectorAll('.close-modal');
             
             // Open modals for projects
-            document.querySelectorAll('.project-card .btn').forEach((btn, index) => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const modalId = `projectModal${index + 1}`;
+            document.querySelectorAll('.project-card .btn[data-modal]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const modalId = this.getAttribute('data-modal');
                     const modal = document.getElementById(modalId);
                     if (modal) {
                         modal.style.display = 'block';
